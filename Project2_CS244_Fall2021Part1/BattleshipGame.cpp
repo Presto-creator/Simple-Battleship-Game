@@ -1,6 +1,12 @@
 
 #include "battleship.h"
 #include <iostream>
+/*
+* Simple Battleship Simulator by Preston
+* Finished on 9/29/2021
+* Features BattleshipGame.cpp, testingFile.cpp, battleship.h, battleship.cpp
+* If you want to use testingFile.cpp, change BattleshipGame.cpp's main to main0 or whatever, and change testineFile.cpp to main
+*/
 
 using std::cout; using std::cin; using std::endl;
 
