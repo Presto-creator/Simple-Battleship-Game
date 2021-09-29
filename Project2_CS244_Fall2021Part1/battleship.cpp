@@ -54,7 +54,7 @@ void Location::fire() {
         cin >> this->coordinates[0];
         cout << " ";
         cin >> this->coordinates[1];
-        if (this->coordinates[0] < 1 || this->coordinates[0] > FIELD_SIZE || this->coordinates[1] < 1 || this->coordinates[1] > FIELD_SIZE) {
+        if (this->coordinates[0] < 0 || this->coordinates[0] > FIELD_SIZE || this->coordinates[1] < 0 || this->coordinates[1] > FIELD_SIZE) {
             cout << "Coordinate input failed! Try again." << endl;
             cin.clear();
             cin.ignore(numeric_limits<streamsize>::max(), '\n');
@@ -144,10 +144,18 @@ int Fleet::check(const Location& loc) const
 
 void Fleet::deployFleet()
 {
-    for (int i = 0; i < FLEET_SIZE; ++i) {
-        Location loc(rand() % FLEET_SIZE, rand() % FLEET_SIZE);
-        ships[i].setLocation(loc);
-    }
+    
+    int i = 0;
+        while (i < FLEET_SIZE) {
+            Location loc;
+            loc.pick();
+            if (check(loc) == -1) {
+                
+                ships[i].setLocation(loc);
+                ++i;
+            }
+        }
+    
 }
 
 bool Fleet::operational() const
@@ -163,11 +171,12 @@ bool Fleet::operational() const
 int Fleet::isHitNSink(const Location& loc)
 {
     for (int i = 0; i < FLEET_SIZE; ++i) {
-        if (this->ships[i].match(loc)) {
-            if (this->ships[i].isSunk()) {
+        if (ships[i].match(loc)) {
+            if (ships[i].isSunk()) {
                 return 2;
             }
             else {
+                ships[i].sink();
                 return 1;
             }
         }
@@ -180,14 +189,14 @@ void Fleet::printFleet() const
 {
     cout << endl;
     for (int i = 0; i < FLEET_SIZE; ++i) {
-        cout << "Ship " << i << ": ";
+        cout << "Ship " << i+1 << ": ";
         ships[i].printShip();
     }
 }
 
 Ship* Fleet::getShipList()
 {
-    return nullptr;
+    return ships;
 }
 
 int Fleet::getFleetSize()

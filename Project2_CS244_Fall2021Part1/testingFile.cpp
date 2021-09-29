@@ -10,7 +10,7 @@ bool validLocations(Fleet);
 bool uniqueLocations(Fleet);
 
 /// this is main function
-int main() {
+int main1() {
 
     srand(time(nullptr)); // random seed   
     // checking location objects created by default and overloaded constructors

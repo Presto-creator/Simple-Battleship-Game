@@ -20,6 +20,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="battleship.cpp" />
+    <ClCompile Include="BattleshipGame.cpp" />
     <ClCompile Include="testingFile.cpp" />
   </ItemGroup>
   <ItemGroup>
